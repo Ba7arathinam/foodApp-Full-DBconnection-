@@ -1,0 +1,59 @@
+button{
+    margin-bottom: 2%;
+}
+.qual,#delete{
+    margin: 0 1% 0 1%;
+    
+}
+.qual{
+    font-weight: 600;
+}
+#delete{
+    display: flex;
+    justify-content: center;
+   background-color: transparent;
+    transition: .1s;
+    color: black;
+    border: none;
+}
+#delete:hover{
+   color: brown;
+ 
+    font-size: small;
+}
+mat-icon:hover{
+    opacity: .9;
+}
+.qual{
+   background-color: transparent;
+   border: none;
+}
+.qual:hover{
+    color: rgb(255, 149, 0);
+    font-weight: 900;
+}
+
+i{
+    color: rgb(17, 16, 17);
+    font-size: large;
+
+}
+.card-title{
+    font-size:x-large;
+    font-weight: 600;
+    color: brown;
+}
+img{
+    border-radius: 0;
+    padding: 5%;
+}
+#miniCart,#chcekout{
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+.card-header{
+    font-size: larger;
+    font-weight: 700;
+}
+
+
+

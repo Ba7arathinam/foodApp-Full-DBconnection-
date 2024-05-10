@@ -1,0 +1,133 @@
+<div class="container">
+  <input type="text" class="form-control mb-3" placeholder="&#xF002; Search for a dish"
+    style="font-family:Arial, FontAwesome" [(ngModel)]="searchTerm" (input)="filterMeals()">
+  <div *ngIf="loading; else content">
+    <!-- <div class="text-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div><br>
+      <strong>Loading...</strong>
+    </div> -->
+    <div class="row m-0">
+    @for (i of '123456'; track $index) {
+      <div class="col-4 mb-3">
+        <p-skeleton height="14rem" styleClass="mb-2"></p-skeleton>
+        <p-skeleton width="14rem" styleClass="mb-2"></p-skeleton>
+        <p-skeleton styleClass="mb-2"></p-skeleton>
+        <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+        <div class="row">
+          <div class="col-3">
+
+          </div>
+          <div class="col-9">
+            <p-skeleton width="16rem" height="4rem" styleClass="mt-3"></p-skeleton>
+          </div>
+        </div>
+      </div>
+    }
+  </div>  
+
+    <!-- <div class="card" aria-hidden="true" >
+ 
+  <div class="card-body " >
+    <h5 class="card-title placeholder-glow">
+      <span class="placeholder col-2"></span>
+    </h5>
+    <p class="card-text placeholder-glow">
+      <span class="placeholder col-7"></span>
+      <span class="placeholder col-4"></span>
+      <span class="placeholder col-4"></span>
+      <span class="placeholder col-6"></span>
+      <span class="placeholder col-8"></span>
+    </p>
+    <a class="btn btn-primary disabled placeholder col-6" aria-disabled="true"></a>
+  </div>
+</div> -->
+  </div>
+  <ng-template #content>
+    <!-- <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4  g-4 card-height"> 
+      <div class="col mb-4" *ngFor="let meal of filteredMeals; let i = index">
+        <div class="card custom-card">
+          <img [src]="meal.strMealThumb" class="card-img-top" alt="Meal Thumbnail">
+          <div class="card-body">
+            <div class="star-icons">
+              <ng-container *ngFor="let star of getStarArray(meal.rating)">
+                <i class="fas fa-star"></i>
+              </ng-container>
+            </div>
+            <h5 class="card-title">{{ meal.strMeal }}</h5>
+            <p class="card-text"><b>Amount</b> {{ meal.amount | currency:'INR' }}</p>
+            <button class="btn btn" (click)="addToCart(meals[i])"><i class="material-icons">shopping_cart</i>Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- style2 -->
+    <div id="main-page">
+      <div class="card border-0 rounded-0 shadow" data-aos="zoom-in" *ngFor="let meal of filteredMeals; let i = index"
+        style="width: 22rem;">
+        <img [src]="meal.strMealThumb" class="card-img-top rounded" alt="Meal Thumbnail">
+        <div class="card-body mt-3 mb-3">
+          <div class="row">
+            <div class="col-10">
+              <h4 class="card-title">{{ meal.strMeal }}</h4>
+              <div class="card-text">
+                <div>
+                  <ng-container *ngFor="let star of getStarArray(meal.rating)">
+                    <i class="fas fa-star star-icons"
+                      [ngStyle]="{'color': meal.rating < 3 ? 'red' : (meal.rating == 3 ? 'orange' : 'green')}"></i>
+                  </ng-container>(123)
+                </div>
+
+              </div>
+            </div>
+            <div class="col-2">
+              <i class="fa-regular fa-heart" style="font-size:x-large;"></i>
+            </div>
+          </div>
+        </div>
+        <div class="row align-items-center text-center g-0">
+          <div class="col-4">
+            <h5>{{ meal.amount | currency:'INR' }}</h5>
+          </div>
+          <div class="col-8">
+            <button style="display: flex;justify-content: center;" class="btn btn-dark w-100 p-3 rounded-0 text-warning"
+              (click)="addToCart(meals[i])"><i class="material-icons">shopping_cart</i>ADD TO CART</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- style3 -->
+
+    <!-- <div class="product-card-container">
+      <div class="product-card" *ngFor="let meal of filteredMeals; let i = index">
+        <img [src]="meal.strMealThumb" alt="Meal Thumbnail">
+        <div class="product-card__body">
+          <div class="product-card__labels">
+            <span class="label label_hit" [ngStyle]="{'background-color': meal.rating < 3 ? 'red' : (meal.rating == 3 ? 'orange' : '')}">
+              <ng-container *ngFor="let star of getStarArray(meal.rating)">
+                <i class="fas fa-star star-icons" ></i>
+              </ng-container>
+            </span>
+          </div>
+          <b>{{ meal.strMeal }}</b>
+         
+          <div class="product-card__stock">In stock</div>
+          <div class="product-card__price price">
+            <span class="price__current">{{ meal.amount | currency:'INR' }}</span>
+            <span class="price__old">{{8054 | currency:'INR'}}</span>
+          </div>
+        
+        </div>
+        <div class="product-card__btn">
+          <button class="btn btn_product"  style="background-color: rgb(252, 170, 40); ;color:black; justify-content: center;" type="button" (click)="addToCart(meals[i])"><i class="material-icons">shopping_cart</i>Add to Cart</button>
+        </div>
+      </div>
+    </div> -->
+
+  </ng-template>
+</div>

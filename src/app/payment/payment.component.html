@@ -1,0 +1,10 @@
+<body>
+    <div  style="display: flex;flex-direction: column-reverse; align-items: center; justify-content: center;">     
+            <button class="btn" style="display: flex;align-items: center; justify-content: center;" (click)="cancel()">Cancel</button>
+         <p>Total amount to pay: <b>{{totalAmount |currency:'INR'}}</b></p>
+         <button class="button --pulse" (click)="PhonePe()"><i class="fa-solid fa-lock"></i> pay Now</button>
+         <i style="color:rgb(21, 19, 19); margin-bottom: 2rem;" class="fa-brands fa-amazon-pay fa-beat fa-fw fa-10x" ></i> 
+        
+    </div>
+    
+</body>

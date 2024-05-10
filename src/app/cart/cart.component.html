@@ -1,0 +1,51 @@
+<div class="container">
+  <h2 class="mb-4">Your Cart</h2>
+  
+  <div *ngIf="cartItems.length === 0" class="alert alert-warning" role="alert">
+    Your cart is empty.
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div *ngFor="let item of cartItems" class="card mb-3"  id="miniCart">
+          <div class="row no-gutters">
+            <div class="col-md-3">
+              <img [src]="item.food.strMealThumb" class="card-img" alt="Meal Thumbnail">
+            </div>
+            <div class="col-md-9">
+              <div class="card-body">
+                <h5 class="card-title">{{ item.food.strMeal }}</h5>
+                <p class="card-text"><b>Price:</b> {{ item.food.amount | currency:'INR' }}</p>
+                <div class="d-flex align-items-center">
+                  <button class="btn btn-warning mr-2 qual" (click)="decreaseQuantity(item)"><i class="fa-solid fa-minus qual"></i></button>
+                  <span class="mr-2">{{ item.quantity }}</span>
+                  <button class="btn btn-warning mr-2 qual"   (click)="increaseQuantity(item)"><i class="fa-solid fa-plus qual"></i></button>
+                  <button class="btn btn-danger " id="delete" (click)="removeFromCart(item)">
+                    <mat-icon>delete</mat-icon> 
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card text-center mb-3" id="chcekout" *ngIf="cartItems.length > 0">
+          <div class="card-header">
+            ORDER SUMMARY
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Total Amount: {{ totalAmount | currency:'INR' }}</h5>
+            <button class="btn btn-warning" (click)="payment()"><i class="fa-solid fa-bag-shopping"></i> Checkout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
