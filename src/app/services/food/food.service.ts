@@ -8,7 +8,7 @@ import { CartItem } from '../../shared/model/cartItems';
 })
 export class FoodService {
  
-  private   foodurl = 'https://balarathinam-foodapp-api.onrender.com/api/meals';
+  private   foodurl = 'https://node-team-food-delivery-app-api.onrender.com/getproduct';
   // private foodurl='http://localhost:9090/api/meals'
  private mailurl = 'https://balarathinam-foodapp-api.onrender.com'; 
   constructor(private http: HttpClient) { }

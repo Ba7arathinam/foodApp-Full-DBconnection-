@@ -64,14 +64,14 @@
     </div> -->
 
     <!-- style2 -->
-    <div id="main-page">
+    <!-- <div id="main-page">
       <div class="card border-0 rounded-0 shadow" data-aos="zoom-in" *ngFor="let meal of filteredMeals; let i = index"
         style="width: 22rem;">
-        <img [src]="meal.strMealThumb" class="card-img-top rounded" alt="Meal Thumbnail">
+        <img [src]="'https://node-team-food-delivery-app-api.onrender.com/getImage?id='+meal.id" class="card-img-top rounded" alt="Meal Thumbnail">
         <div class="card-body mt-3 mb-3">
           <div class="row">
             <div class="col-10">
-              <h4 class="card-title">{{ meal.strMeal }}</h4>
+              <h4 class="card-title">{{ meal.Product_name }}</h4>
               <div class="card-text">
                 <div>
                   <ng-container *ngFor="let star of getStarArray(meal.rating)">
@@ -89,7 +89,7 @@
         </div>
         <div class="row align-items-center text-center g-0">
           <div class="col-4">
-            <h5>{{ meal.amount | currency:'INR' }}</h5>
+            <h5>{{ meal.Price | currency:'INR' }}</h5>
           </div>
           <div class="col-8">
             <button style="display: flex;justify-content: center;" class="btn btn-dark w-100 p-3 rounded-0 text-warning"
@@ -97,28 +97,30 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
 
 
     <!-- style3 -->
 
-    <!-- <div class="product-card-container">
+    <div class="product-card-container">
       <div class="product-card" *ngFor="let meal of filteredMeals; let i = index">
-        <img [src]="meal.strMealThumb" alt="Meal Thumbnail">
+        <img [src]="'https://node-team-food-delivery-app-api.onrender.com/getImage?id='+meal.id" alt="Meal Thumbnail">
         <div class="product-card__body">
           <div class="product-card__labels">
             <span class="label label_hit" [ngStyle]="{'background-color': meal.rating < 3 ? 'red' : (meal.rating == 3 ? 'orange' : '')}">
               <ng-container *ngFor="let star of getStarArray(meal.rating)">
-                <i class="fas fa-star star-icons" ></i>
+              {{meal.rating}}<i class="fas fa-star star-icons" ></i>
               </ng-container>
             </span>
           </div>
-          <b>{{ meal.strMeal }}</b>
-         
-          <div class="product-card__stock">In stock</div>
+          <b style="font-size: x-large; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">{{ meal.Product_name }}</b>
+           <details style="font-size: large;">
+            {{ meal.Description }}
+           </details>
+          <div class="product-card__stock" style="font-size: large; font-weight: 500; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">In stock</div>
           <div class="product-card__price price">
-            <span class="price__current">{{ meal.amount | currency:'INR' }}</span>
+            <span class="price__current">{{ meal.price | currency:'INR' }}</span>
             <span class="price__old">{{8054 | currency:'INR'}}</span>
           </div>
         
@@ -127,7 +129,7 @@
           <button class="btn btn_product"  style="background-color: rgb(252, 170, 40); ;color:black; justify-content: center;" type="button" (click)="addToCart(meals[i])"><i class="material-icons">shopping_cart</i>Add to Cart</button>
         </div>
       </div>
-    </div> -->
+    </div>
 
   </ng-template>
 </div>

@@ -57,7 +57,7 @@ img:hover{
 
 /* card2 */
 
-#main-page {
+/* #main-page {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -121,12 +121,12 @@ img:hover{
   .card {
     width: 18%;
   }
-}
+} */
 
 /* card3 */
 
 
-/* .product-card-container {
+.product-card-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 30px;
@@ -213,7 +213,9 @@ img:hover{
 
 .low-rating{
  background-color: orangered;
-} */
+}
+
+
 
 
 /* skeliton */

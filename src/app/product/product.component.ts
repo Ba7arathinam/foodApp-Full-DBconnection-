@@ -32,6 +32,7 @@ export class ProductComponent  {
   meals: any[] = [];
   filteredMeals: any[] = [];
   searchTerm: any = '';
+  img:any='https://node-team-food-delivery-app-api.onrender.com/getImage?id='
   constructor(
     private val: FoodService,
     private Route: Router,
@@ -61,9 +62,11 @@ export class ProductComponent  {
     this.val.getFood().subscribe(
       (res) => {
         this.loading = false;
-        console.log(res);
-        this.meals = res.meals;
+        // console.log(res);
+        this.meals = res.message;
         this.filteredMeals = this.meals;
+        console.log(this.filteredMeals);
+        
       },
       (error) => {
         console.error('Error fetching data:', error);
@@ -76,7 +79,7 @@ export class ProductComponent  {
       this.filteredMeals = this.meals;
     } else {
       this.filteredMeals = this.meals.filter((meal) =>
-        meal.strMeal.toLowerCase().includes(this.searchTerm.toLowerCase())
+        meal.Product_name.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
     }
   }
