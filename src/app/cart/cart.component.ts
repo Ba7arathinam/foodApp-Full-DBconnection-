@@ -8,43 +8,41 @@ import { Router, RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpErrorResponse } from '@angular/common/http';
 
 
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CurrencyPipe,NgIf,NgFor,MatIcon,FormsModule,RouterModule,ReactiveFormsModule],
+  imports: [CurrencyPipe,NgIf,NgFor,MatIcon,FormsModule,RouterModule,ReactiveFormsModule,HttpClientModule],
   providers:[CartDataService],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
 export class CartComponent {
 
-  cartItems: CartItem[] = [];
+  cartItems: any[] = [];
   totalAmount: number = 0;
 
-
- 
-
-
-
-  constructor(private cartService: CartDataService,private route:Router) {
+  constructor(private cartService: CartDataService,private route:Router,private http:HttpClient) {
     
   }
  
   
 
   ngOnInit(): void {
-    console.log('start cart')
-    this.cartItems = this.cartService.getCartItems();
-    this.totalAmount = this.cartService.getTotalAmount();
-    console.log('end cart')
-  
+    this.cartService.getCart().subscribe((data:any)=>{
+      this.cartItems=data.meals
+      this.totalAmount=data.totalAmount
+      console.log(data);
+          });
+          console.log(this.cartItems)
+ 
   }
 
-  decreaseQuantity(item: CartItem) {
+  decreaseQuantity(item: any) {
+    console.log(item)
     if (item.quantity > 1) {
       item.quantity--;
       this.updateCartItem(item);
@@ -57,25 +55,24 @@ export class CartComponent {
   }
 
   updateCartItem(item: CartItem) {
-    let cartItems: CartItem[] = this.cartService.getCartItems();
-    cartItems = cartItems.map(cartItem => {
-      if (cartItem.food.idMeal === item.food.idMeal) {
-        return item;
-      }
-      return cartItem;
-    });
-    sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
+    // let cartItems: CartItem[] = this.cartService.getCartItems();
+    // cartItems = cartItems.map(cartItem => {
+    //   if (cartItem.food.idMeal === item.food.idMeal) {
+    //     return item;
+    //   }
+    //   return cartItem;
+    // });
+    // sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
   }
-  removeFromCart(item: CartItem) {
-    this.cartService.removeFromCart(item);
-    this.cartItems = this.cartService.getCartItems();
-    this.totalAmount = this.cartService.getTotalAmount();
+  removeFromCart(item: any) {
+   this.cartService.removeFromCart(item.p_id).subscribe((e)=>{
+    alert(`${item.p_name} has been removed from Your Cart`)
+   })
+   
   }
 
 
-  calculateAmount(item: CartItem): number {
-    return item.food.amount * item.quantity;
-  }
+
   payment(){
     this.route.navigate(['payment']);
   }

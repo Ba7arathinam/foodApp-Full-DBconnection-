@@ -110,7 +110,7 @@
           <div class="product-card__labels">
             <span class="label label_hit" [ngStyle]="{'background-color': meal.rating < 3 ? 'red' : (meal.rating == 3 ? 'orange' : '')}">
               <ng-container *ngFor="let star of getStarArray(meal.rating)">
-              {{meal.rating}}<i class="fas fa-star star-icons" ></i>
+              {{meal.rating}}<i class="fas fa-star star-icons"></i>
               </ng-container>
             </span>
           </div>
@@ -120,7 +120,7 @@
            </details>
           <div class="product-card__stock" style="font-size: large; font-weight: 500; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">In stock</div>
           <div class="product-card__price price">
-            <span class="price__current">{{ meal.price | currency:'INR' }}</span>
+            <span class="price__current">{{ meal.Price | currency:'INR' }}</span>
             <span class="price__old">{{8054 | currency:'INR'}}</span>
           </div>
         

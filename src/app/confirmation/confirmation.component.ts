@@ -28,7 +28,7 @@ export class ConfirmationComponent {
       this.responseData = JSON.parse(params['data']);
     });
     console.log(this.responseData);
-    this.totalAmount=this.cart.getTotalAmount()
+    this.totalAmount=0
   }
 
 }

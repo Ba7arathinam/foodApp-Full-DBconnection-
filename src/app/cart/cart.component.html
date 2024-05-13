@@ -8,15 +8,15 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6">
-        <div *ngFor="let item of cartItems" class="card mb-3"  id="miniCart">
+        <div *ngFor="let item of cartItems; let i = index" class="card mb-3"  id="miniCart">
           <div class="row no-gutters">
             <div class="col-md-3">
-              <img [src]="item.food.strMealThumb" class="card-img" alt="Meal Thumbnail">
+              <img [src]="'https://node-team-food-delivery-app-api.onrender.com/getImage?id='+item.p_id" class="card-img" alt="Meal Thumbnail">
             </div>
             <div class="col-md-9">
               <div class="card-body">
-                <h5 class="card-title">{{ item.food.strMeal }}</h5>
-                <p class="card-text"><b>Price:</b> {{ item.food.amount | currency:'INR' }}</p>
+                <h5 class="card-title">{{ item.p_name }}</h5>
+                <p class="card-text"><b>Price:</b> {{ item.total_price | currency:'INR' }}</p>
                 <div class="d-flex align-items-center">
                   <button class="btn btn-warning mr-2 qual" (click)="decreaseQuantity(item)"><i class="fa-solid fa-minus qual"></i></button>
                   <span class="mr-2">{{ item.quantity }}</span>

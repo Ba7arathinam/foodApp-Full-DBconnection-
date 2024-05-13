@@ -1,5 +1,5 @@
 import { CurrencyPipe, NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FoodService } from '../services/food/food.service';
 import { Router, RouterModule } from '@angular/router';
@@ -32,11 +32,13 @@ export class ProductComponent  {
   meals: any[] = [];
   filteredMeals: any[] = [];
   searchTerm: any = '';
-  img:any='https://node-team-food-delivery-app-api.onrender.com/getImage?id='
+  id=sessionStorage.getItem('id')
+  addtocart:string=`https://node-team-food-delivery-app-api.onrender.com/addCart/${this.id}/`
   constructor(
     private val: FoodService,
     private Route: Router,
-    private cart: CartDataService
+    private cart: CartDataService,
+    private http:HttpClient
   ) {}
   getStarArray(rating: number): number[] {
     return Array(rating)
@@ -45,15 +47,17 @@ export class ProductComponent  {
   }
 
   addToCart(food: any) {
-    const existingCartItem = this.cart.getCartItem(food.idMeal);
-
-    if (existingCartItem) {
-      existingCartItem.quantity++;
-      this.cart.updateCartItem(existingCartItem);
+    let cart=this.http.post(this.addtocart+food.id,{}).subscribe((res)=>{
+      console.log(res)
+   
+    })
+  console.log(this.cart.CartDatas)
+    if (cart) {
+      this.Route.navigate(['/cart']);
     } else {
-      this.cart.addToCart(food);
+     alert('Data Error')
     }
-    this.Route.navigate(['/cart']);
+    
   }
 
   ngOnInit() :void {

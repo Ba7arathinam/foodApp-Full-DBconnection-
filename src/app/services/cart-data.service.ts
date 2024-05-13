@@ -1,55 +1,44 @@
+import { HttpClient } from '@angular/common/http';
 import { CartItem } from './../shared/model/cartItems';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartDataService {
-  
-
-  constructor() {}
+  id=sessionStorage.getItem('id')
+viewCart:string=`http://localhost:8080/getCart/${this.id}`
+deleteCart:string=`http://localhost:8080/deleteCart?u_id=${this.id}&p_id=`
+CartDatas!:any[];
+  constructor(private http:HttpClient) {}
    transactionID:any;
   addToCart(item: any) {
-    let cartItems: CartItem[] = this.getCartItems();
-    const cartItem: any = {
-      food: item,
-      quantity: 1
-    };
-    cartItems.push(cartItem);
-    sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
+console.log(item);
   }
 
-  getCartItems(): CartItem[] {
-    const storedItems = sessionStorage.getItem('cartItems');
-    return storedItems ? JSON.parse(storedItems) : [];
-  }
-  getCartItem(foodId: string): CartItem | undefined {
-    const cartItems = this.getCartItems();
-    return cartItems.find(item => item.food.idMeal === foodId);
-  }
+ 
+  getCart(): Observable<any> {
+  
+    return this.http.get(this.viewCart)
+   
+   }
+
   
   updateCartItem(item: CartItem) {
-    let cartItems: CartItem[] = this.getCartItems();
-    const index = cartItems.findIndex(cartItem => cartItem.food.idMeal === item.food.idMeal);
-    if (index !== -1) {
-      cartItems[index] = item;
-      sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
-    }
+    // let cartItems: CartItem[] = this.getCartItems();
+    // const index = cartItems.findIndex(cartItem => cartItem.food.idMeal === item.food.idMeal);
+    // if (index !== -1) {
+    //   cartItems[index] = item;
+    //   sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
+    // }
     
   }
-  getTotalAmount(): number {
-    const cartItems = this.getCartItems();
-    return cartItems.reduce((total, item) => total + (item.food.amount * item.quantity), 0);
-  }
+ 
 
-  removeFromCart(item: CartItem) {
-    let cartItems: CartItem[] = this.getCartItems();
-    const index = cartItems.findIndex(cartItem => cartItem.food.idMeal === item.food.idMeal);
-    if (index !== -1) {
-      cartItems.splice(index, 1);
-      sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
-    }
+  removeFromCart(P_id:number):Observable<any> {
+   return this.http.delete(this.deleteCart+P_id)
   }
  
    }
