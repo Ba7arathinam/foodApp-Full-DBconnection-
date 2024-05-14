@@ -3,43 +3,35 @@ import { CartItem } from './../shared/model/cartItems';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartDataService {
-  id=sessionStorage.getItem('id')
-viewCart:string=`http://localhost:8080/getCart/${this.id}`
-deleteCart:string=`http://localhost:8080/deleteCart?u_id=${this.id}&p_id=`
-CartDatas!:any[];
-  constructor(private http:HttpClient) {}
-   transactionID:any;
+  id :any= sessionStorage.getItem('id');
+  viewCart: string = `http://localhost:8080/getCart/${this.id}`;
+  deleteCart: string = `http://localhost:8080/deleteCart?u_id=${this.id}&p_id=`;
+  quantity:string='http://localhost:8080/updateCart/'
+  CartDatas!: any[];
+  constructor(private http: HttpClient) {}
+  transactionID: any;
   addToCart(item: any) {
-console.log(item);
+    console.log(item);
   }
 
- 
   getCart(): Observable<any> {
-  
-    return this.http.get(this.viewCart)
-   
-   }
-
-  
-  updateCartItem(item: CartItem) {
-    // let cartItems: CartItem[] = this.getCartItems();
-    // const index = cartItems.findIndex(cartItem => cartItem.food.idMeal === item.food.idMeal);
-    // if (index !== -1) {
-    //   cartItems[index] = item;
-    //   sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
-    // }
-    
+    return this.http.get(this.viewCart);
   }
- 
 
-  removeFromCart(P_id:number):Observable<any> {
-   return this.http.delete(this.deleteCart+P_id)
+  increaseQyt(cart_id:any):Observable<any>{
+    let id=JSON.parse(this.id)
+    return this.http.post(this.quantity+cart_id+'/increase',{"userId":id})
   }
- 
-   }
+  decreaseQyt(cart_id:any):Observable<any>{
+    let id=JSON.parse(this.id)
+    return this.http.post(this.quantity+cart_id+'/decrease',{"userId":id})
+  }
 
+  removeFromCart(P_id: number): Observable<any> {
+    return this.http.delete(this.deleteCart + P_id);
+  }
+}

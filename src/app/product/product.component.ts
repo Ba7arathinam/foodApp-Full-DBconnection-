@@ -51,7 +51,7 @@ export class ProductComponent  {
       console.log(res)
    
     })
-  console.log(this.cart.CartDatas)
+
     if (cart) {
       this.Route.navigate(['/cart']);
     } else {

@@ -26,7 +26,11 @@ export class CartComponent {
   totalAmount: number = 0;
 
   constructor(private cartService: CartDataService,private route:Router,private http:HttpClient) {
-    
+    this.cartService.getCart().subscribe((data:any)=>{
+      this.cartItems=data.meals
+      this.totalAmount=data.totalAmount
+      console.log(data);
+          });
   }
  
   
@@ -42,31 +46,43 @@ export class CartComponent {
   }
 
   decreaseQuantity(item: any) {
-    console.log(item)
-    if (item.quantity > 1) {
-      item.quantity--;
-      this.updateCartItem(item);
-    }
+    this.cartService.decreaseQyt(item.id).subscribe((data)=>{
+      // if(data.status==200){
+        this.cartService.getCart().subscribe((data:any)=>{
+          this.cartItems=data.meals
+          this.totalAmount=data.totalAmount
+          console.log(data);
+              });
+      // }
+      
+    })
   }
 
-  increaseQuantity(item: CartItem) {
-    item.quantity++;
-    this.updateCartItem(item);
+  increaseQuantity(item: any) {
+    // console.log(item.id);
+    
+    this.cartService.increaseQyt(item.id).subscribe((data)=>{
+      // if(data.status==200){
+        this.cartService.getCart().subscribe((data:any)=>{
+          this.cartItems=data.meals
+          this.totalAmount=data.totalAmount
+          console.log(data);
+              });
+      // }
+      
+    })
   }
 
-  updateCartItem(item: CartItem) {
-    // let cartItems: CartItem[] = this.cartService.getCartItems();
-    // cartItems = cartItems.map(cartItem => {
-    //   if (cartItem.food.idMeal === item.food.idMeal) {
-    //     return item;
-    //   }
-    //   return cartItem;
-    // });
-    // sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
-  }
+
   removeFromCart(item: any) {
    this.cartService.removeFromCart(item.p_id).subscribe((e)=>{
+    this.cartService.getCart().subscribe((data:any)=>{
+      this.cartItems=data.meals
+      this.totalAmount=data.totalAmount
+      console.log(data);
+          });
     alert(`${item.p_name} has been removed from Your Cart`)
+  
    })
    
   }
