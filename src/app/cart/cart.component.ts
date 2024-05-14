@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpClientModule, HttpErrorResponse } from '@angular/common/http';
+import { cart } from 'ngx-bootstrap-icons';
 
 
 
@@ -26,11 +27,7 @@ export class CartComponent {
   totalAmount: number = 0;
 
   constructor(private cartService: CartDataService,private route:Router,private http:HttpClient) {
-    this.cartService.getCart().subscribe((data:any)=>{
-      this.cartItems=data.meals
-      this.totalAmount=data.totalAmount
-      console.log(data);
-          });
+   
   }
  
   
@@ -39,6 +36,7 @@ export class CartComponent {
     this.cartService.getCart().subscribe((data:any)=>{
       this.cartItems=data.meals
       this.totalAmount=data.totalAmount
+      this.cartService.totalAmount=this.totalAmount
       console.log(data);
           });
           console.log(this.cartItems)
@@ -51,6 +49,7 @@ export class CartComponent {
         this.cartService.getCart().subscribe((data:any)=>{
           this.cartItems=data.meals
           this.totalAmount=data.totalAmount
+          this.cartService.totalAmount=this.totalAmount
           console.log(data);
               });
       // }
@@ -66,6 +65,7 @@ export class CartComponent {
         this.cartService.getCart().subscribe((data:any)=>{
           this.cartItems=data.meals
           this.totalAmount=data.totalAmount
+          this.cartService.totalAmount=this.totalAmount
           console.log(data);
               });
       // }
@@ -76,12 +76,16 @@ export class CartComponent {
 
   removeFromCart(item: any) {
    this.cartService.removeFromCart(item.p_id).subscribe((e)=>{
+    if(e){
+      alert(`${item.p_name} has been removed from Your Cart`)
+    }
     this.cartService.getCart().subscribe((data:any)=>{
       this.cartItems=data.meals
       this.totalAmount=data.totalAmount
+      this.cartService.totalAmount=this.totalAmount
       console.log(data);
           });
-    alert(`${item.p_name} has been removed from Your Cart`)
+   
   
    })
    

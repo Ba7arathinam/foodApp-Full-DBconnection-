@@ -19,7 +19,12 @@ export class PaymentComponent {
  totalAmount!:number;
  
 constructor(private Route:Router,private payment:CartDataService,private http:HttpClient){
-  this.totalAmount=0
+  this.payment.getCart().subscribe((data:any)=>{
+    this.totalAmount=data.totalAmount
+        });
+
+  console.log(this.totalAmount);
+  
 }
 //PhonePe
 PhonePe():any{

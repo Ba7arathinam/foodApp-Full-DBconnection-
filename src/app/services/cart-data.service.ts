@@ -8,10 +8,10 @@ import { Observable } from 'rxjs';
 })
 export class CartDataService {
   id :any= sessionStorage.getItem('id');
-  viewCart: string = `http://localhost:8080/getCart/${this.id}`;
-  deleteCart: string = `http://localhost:8080/deleteCart?u_id=${this.id}&p_id=`;
-  quantity:string='http://localhost:8080/updateCart/'
-  CartDatas!: any[];
+  viewCart: string = `https://node-team-food-delivery-app-api.onrender.com/getCart/${this.id}`;
+  deleteCart: string = `https://node-team-food-delivery-app-api.onrender.com/deleteCart?u_id=${this.id}&p_id=`;
+  quantity:string='https://node-team-food-delivery-app-api.onrender.com/updateCart/'
+  totalAmount: number=0
   constructor(private http: HttpClient) {}
   transactionID: any;
   addToCart(item: any) {
@@ -34,4 +34,5 @@ export class CartDataService {
   removeFromCart(P_id: number): Observable<any> {
     return this.http.delete(this.deleteCart + P_id);
   }
+ 
 }

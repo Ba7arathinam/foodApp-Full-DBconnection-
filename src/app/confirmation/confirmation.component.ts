@@ -17,7 +17,11 @@ export class ConfirmationComponent {
   responseData: any;
    totalAmount:any;
 
-  constructor(private route: ActivatedRoute,private router :Router,private cart:CartDataService) { }
+  constructor(private route: ActivatedRoute,private router :Router,private cart:CartDataService) { 
+    this.cart.getCart().subscribe((data:any)=>{
+      this.totalAmount=data.totalAmount
+          });
+  }
    continueShop(){
     sessionStorage.removeItem('cartItems')
     this.router.navigate(['products'])
@@ -28,7 +32,7 @@ export class ConfirmationComponent {
       this.responseData = JSON.parse(params['data']);
     });
     console.log(this.responseData);
-    this.totalAmount=0
+    this.totalAmount=this.cart.totalAmount
   }
 
 }

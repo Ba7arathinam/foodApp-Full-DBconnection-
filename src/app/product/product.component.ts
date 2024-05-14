@@ -48,15 +48,18 @@ export class ProductComponent  {
 
   addToCart(food: any) {
     let cart=this.http.post(this.addtocart+food.id,{}).subscribe((res)=>{
-      console.log(res)
+    if(res){
+      this.cart.getCart().subscribe((e)=>{
+        if(e){
+          this.Route.navigate(['/cart']);
+        }else{
+          alert('Data Error')
+        }
+      })
+    }
    
     })
 
-    if (cart) {
-      this.Route.navigate(['/cart']);
-    } else {
-     alert('Data Error')
-    }
     
   }
 
